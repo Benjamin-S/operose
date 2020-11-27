@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Operose.HelpersLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,17 +7,23 @@ using System.Windows.Forms;
 
 namespace Operose
 {
-    static class Program
+    internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        public const string Name = "Operose";
+
+        internal static MainForm MainForm { get; private set; }
+
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            DebugHelper.WriteLine("MainForm init started.");
+            MainForm = new MainForm();
+            DebugHelper.WriteLine("Mainform init finished.");
+
+            Application.Run(MainForm);
         }
     }
 }
