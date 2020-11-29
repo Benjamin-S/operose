@@ -39,12 +39,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ToolStripBorderRight.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DebugHelper.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="OperoseTheme.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
