@@ -29,13 +29,13 @@ namespace Operose
         [STAThread]
         static void Main(string[] args)
         {
+            InitialiseDefaults();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             DebugHelper.WriteLine("MainForm init started.");
             MainForm = new MainForm();
             DebugHelper.WriteLine("Mainform init finished.");
-
             Application.Run(MainForm);
         }
 
