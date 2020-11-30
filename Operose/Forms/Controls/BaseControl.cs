@@ -22,7 +22,7 @@ namespace Operose
         public BaseControl(string controlName)
         {
             InitializeComponent();
-            Dock = DockStyle.Fill;
+
             ControlName = controlName;
             lblName.Text = ControlName;
         }

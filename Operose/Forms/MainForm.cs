@@ -57,12 +57,15 @@ namespace Operose
             {
                 case "Production":
                     Program.currentEnvironment = Program.Environment.PRODUCTION;
+                    Program.ConnectionString = Properties.Settings.Default.ProdCon;
                     break;
                 case "Development":
                     Program.currentEnvironment = Program.Environment.DEVELOPMENT;
+                    Program.ConnectionString = Properties.Settings.Default.DevCon;
                     break;
                 case "Test":
                     Program.currentEnvironment = Program.Environment.TEST;
+                    Program.ConnectionString = Properties.Settings.Default.TestCon;
                     break;
 
             }

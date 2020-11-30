@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operose", "Operose\Operose.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operose.HelpersLib", "Operose.HelpersLib\Operose.HelpersLib.csproj", "{6369F9A8-EF19-4FEF-8EF4-DE57AC8CA111}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operose.ServicesLib", "Operose.ServicesLib\Operose.ServicesLib.csproj", "{3753722E-E5CD-4FCC-99E8-07C8C956E82C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6369F9A8-EF19-4FEF-8EF4-DE57AC8CA111}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6369F9A8-EF19-4FEF-8EF4-DE57AC8CA111}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6369F9A8-EF19-4FEF-8EF4-DE57AC8CA111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3753722E-E5CD-4FCC-99E8-07C8C956E82C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3753722E-E5CD-4FCC-99E8-07C8C956E82C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3753722E-E5CD-4FCC-99E8-07C8C956E82C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3753722E-E5CD-4FCC-99E8-07C8C956E82C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
 ﻿using Operose.HelpersLib;
+using Operose.ServicesLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Operose
     internal static class Program
     {
         public const string Name = "Operose";
+        public static string ConnectionString;
+        
 
         internal enum Environment
         {
@@ -39,6 +42,7 @@ namespace Operose
         static void InitialiseDefaults()
         {
             currentEnvironment = Environment.PRODUCTION;
+            ConnectionString = Properties.Settings.Default.ProdCon;
         }
     }
 }

@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ComponentModel.Design;
 
 namespace Operose
 {
-    public partial class BlockingSessionsControl : BaseControl
+    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
+    public partial class BlockingSessionsControl : BaseControl 
     {
-
-        public BlockingSessionsControl(string controlName) : base(controlName)
+        public BlockingSessionsControl(string controlName)
         {
             InitializeComponent();
             ControlName = controlName;

@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <EmbeddedResource Include="Forms\Controls\BaseControl.resx">
       <DependentUpon>BaseControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -111,6 +112,10 @@
     <ProjectReference Include="..\Operose.HelpersLib\Operose.HelpersLib.csproj">
       <Project>{6369f9a8-ef19-4fef-8ef4-de57ac8ca111}</Project>
       <Name>Operose.HelpersLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Operose.ServicesLib\Operose.ServicesLib.csproj">
+      <Project>{3753722e-e5cd-4fcc-99e8-07c8c956e82c}</Project>
+      <Name>Operose.ServicesLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
