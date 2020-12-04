@@ -31,13 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pToolbars = new System.Windows.Forms.Panel();
             this.tsMain = new Operose.HelpersLib.Controls.ToolStripBorderRight();
-            this.tsbHome = new System.Windows.Forms.ToolStripButton();
-            this.tsbBlockingSession = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsEnvironment = new Operose.HelpersLib.Controls.ToolStripBorderRight();
             this.tsddbEnvironment = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiProduction = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +39,6 @@
             this.tslbEnvironment = new System.Windows.Forms.ToolStripLabel();
             this.pMain = new System.Windows.Forms.Panel();
             this.pToolbars.SuspendLayout();
-            this.tsMain.SuspendLayout();
             this.tsEnvironment.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,14 +58,6 @@
             this.tsMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsMain.DrawCustomBorder = true;
             this.tsMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbHome,
-            this.tsbBlockingSession,
-            this.toolStripButton4,
-            this.toolStripButton3,
-            this.toolStripButton2,
-            this.toolStripButton1,
-            this.toolStripSeparator1});
             this.tsMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.tsMain.Location = new System.Drawing.Point(0, 0);
             this.tsMain.Name = "tsMain";
@@ -81,65 +65,6 @@
             this.tsMain.TabIndex = 2;
             this.tsMain.Text = "toolStrip1";
             this.tsMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.HandleToolStripItemChange);
-            // 
-            // tsbHome
-            // 
-            this.tsbHome.Image = ((System.Drawing.Image)(resources.GetObject("tsbHome.Image")));
-            this.tsbHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tsbHome.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbHome.Name = "tsbHome";
-            this.tsbHome.Size = new System.Drawing.Size(163, 20);
-            this.tsbHome.Text = "Home";
-            // 
-            // tsbBlockingSession
-            // 
-            this.tsbBlockingSession.Image = ((System.Drawing.Image)(resources.GetObject("tsbBlockingSession.Image")));
-            this.tsbBlockingSession.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tsbBlockingSession.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbBlockingSession.Name = "tsbBlockingSession";
-            this.tsbBlockingSession.Size = new System.Drawing.Size(163, 20);
-            this.tsbBlockingSession.Text = "Blocking Sessions";
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(163, 20);
-            this.toolStripButton4.Text = "Home";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(163, 20);
-            this.toolStripButton3.Text = "Home";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(163, 20);
-            this.toolStripButton2.Text = "Home";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(163, 20);
-            this.toolStripButton1.Text = "Home";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(163, 6);
             // 
             // tsEnvironment
             // 
@@ -219,8 +144,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.pToolbars.ResumeLayout(false);
             this.pToolbars.PerformLayout();
-            this.tsMain.ResumeLayout(false);
-            this.tsMain.PerformLayout();
             this.tsEnvironment.ResumeLayout(false);
             this.tsEnvironment.PerformLayout();
             this.ResumeLayout(false);
@@ -231,13 +154,6 @@
 
         private System.Windows.Forms.Panel pToolbars;
         private Operose.HelpersLib.Controls.ToolStripBorderRight tsMain;
-        private System.Windows.Forms.ToolStripButton tsbHome;
-        private System.Windows.Forms.ToolStripButton tsbBlockingSession;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel pMain;
         private Operose.HelpersLib.Controls.ToolStripBorderRight tsEnvironment;
         private System.Windows.Forms.ToolStripDropDownButton tsddbEnvironment;

@@ -44,5 +44,11 @@
     <Compile Include="DatabaseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Operose.HelpersLib\Operose.HelpersLib.csproj">
+      <Project>{6369f9a8-ef19-4fef-8ef4-de57ac8ca111}</Project>
+      <Name>Operose.HelpersLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

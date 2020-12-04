@@ -28,26 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.pnlContainer = new System.Windows.Forms.Panel();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.cbOwnSpid = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.dgvBlockingList = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.cbSummary = new System.Windows.Forms.CheckBox();
             this.pnlContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBlockingList)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 157);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(516, 281);
-            this.dataGridView1.TabIndex = 1;
             // 
             // button1
             // 
@@ -60,55 +51,85 @@
             // 
             // pnlContainer
             // 
+            this.pnlContainer.Controls.Add(this.cbSummary);
+            this.pnlContainer.Controls.Add(this.cbOwnSpid);
             this.pnlContainer.Controls.Add(this.btnRefresh);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(516, 29);
+            this.pnlContainer.Size = new System.Drawing.Size(516, 76);
             this.pnlContainer.TabIndex = 0;
             // 
-            // dataGridView2
+            // cbOwnSpid
             // 
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 0);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(510, 435);
-            this.dataGridView2.TabIndex = 0;
+            this.cbOwnSpid.AutoSize = true;
+            this.cbOwnSpid.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbOwnSpid.Location = new System.Drawing.Point(3, 7);
+            this.cbOwnSpid.Name = "cbOwnSpid";
+            this.cbOwnSpid.Size = new System.Drawing.Size(112, 19);
+            this.cbOwnSpid.TabIndex = 1;
+            this.cbOwnSpid.Text = "Include Operose";
+            this.cbOwnSpid.UseVisualStyleBackColor = true;
+            this.cbOwnSpid.CheckedChanged += new System.EventHandler(this.SpCheckbox_HandleChanged);
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.Location = new System.Drawing.Point(438, 3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 0;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // dgvBlockingList
+            // 
+            this.dgvBlockingList.AllowUserToAddRows = false;
+            this.dgvBlockingList.AllowUserToDeleteRows = false;
+            this.dgvBlockingList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBlockingList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvBlockingList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvBlockingList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBlockingList.Location = new System.Drawing.Point(0, 0);
+            this.dgvBlockingList.Name = "dgvBlockingList";
+            this.dgvBlockingList.ReadOnly = true;
+            this.dgvBlockingList.Size = new System.Drawing.Size(516, 362);
+            this.dgvBlockingList.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.dataGridView2);
+            this.panel1.Controls.Add(this.dgvBlockingList);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 76);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(516, 438);
+            this.panel1.Size = new System.Drawing.Size(516, 362);
             this.panel1.TabIndex = 1;
+            // 
+            // cbSummary
+            // 
+            this.cbSummary.AutoSize = true;
+            this.cbSummary.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbSummary.Location = new System.Drawing.Point(3, 32);
+            this.cbSummary.Name = "cbSummary";
+            this.cbSummary.Size = new System.Drawing.Size(85, 19);
+            this.cbSummary.TabIndex = 2;
+            this.cbSummary.Text = "Summarise";
+            this.cbSummary.UseVisualStyleBackColor = true;
+            this.cbSummary.CheckedChanged += new System.EventHandler(this.SummaryCheckbox_HandleChanged);
             // 
             // BlockingSessionsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlContainer);
             this.Name = "BlockingSessionsControl";
             this.Size = new System.Drawing.Size(516, 438);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.ParentChanged += new System.EventHandler(this.BlockingSessionsControl_ParentChanged);
             this.pnlContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.pnlContainer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBlockingList)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -116,11 +137,12 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel pnlContainer;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvBlockingList;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cbOwnSpid;
+        private System.Windows.Forms.CheckBox cbSummary;
     }
 }

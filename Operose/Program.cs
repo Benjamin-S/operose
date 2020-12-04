@@ -1,47 +1,78 @@
 ﻿using Operose.HelpersLib;
 using Operose.ServicesLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
+using System.Text;
+using System.Diagnostics;
 
 namespace Operose
 {
     internal static class Program
     {
         public const string Name = "Operose";
-        public static string ConnectionString;
-        
 
-        internal enum Environment
+        public static string VersionText
         {
-            PRODUCTION,
-            DEVELOPMENT,
-            TEST
+            get
+            {
+                StringBuilder sbVersionText = new StringBuilder();
+                Version version = Version.Parse(Application.ProductVersion);
+                sbVersionText.Append(version.Major + "." + version.Minor);
+                if (version.Build > 0) sbVersionText.Append("." + version.Build);
+                if (version.Revision > 0) sbVersionText.Append("." + version.Revision);
+                return sbVersionText.ToString();
+            }
         }
 
-        public static Environment currentEnvironment;
+        public static string Title => $"{Name} {VersionText}";
+
+        public static string ConnectionString;
+        public static DatabaseEnv currentEnvironment;
 
         internal static MainForm MainForm { get; private set; }
+        internal static StuckBatchesForm StuckBatchesForm { get; set; }
+
+        internal static Stopwatch StartTimer { get; private set; }
+
+        internal static DatabaseService databaseService = new DatabaseService();
 
         [STAThread]
         static void Main(string[] args)
         {
+            // Allow Visual Studio to break on exceptions in Debug builds
+#if !DEBUG
+            // Add the event handler for handling UI thread exceptions to the event
+            Application.ThreadException += Application_ThreadException;
+
+            // Set the unhandled exception mode to force all Windows Forms errors to go through our handler
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+            // Add the event handler for handling non-UI thread exceptions to the event
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+#endif
+
+            StartTimer = Stopwatch.StartNew();
+
             InitialiseDefaults();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            DebugHelper.WriteLine("Operose starting.");
+            DebugHelper.WriteLine("Version: " + VersionText);
+            //DebugHelper.WriteLine("Build: " + Build);
+            DebugHelper.WriteLine("Command line: " + Environment.CommandLine);
+
             DebugHelper.WriteLine("MainForm init started.");
             MainForm = new MainForm();
             DebugHelper.WriteLine("Mainform init finished.");
+
             Application.Run(MainForm);
+            //Application.Run(new StuckBatchesForm());
         }
 
         static void InitialiseDefaults()
         {
-            currentEnvironment = Environment.PRODUCTION;
+            currentEnvironment = DatabaseEnv.Production;
             ConnectionString = Properties.Settings.Default.ProdCon;
         }
     }
