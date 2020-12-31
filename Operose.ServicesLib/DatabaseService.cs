@@ -1,5 +1,6 @@
 ﻿using Operose.HelpersLib;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -7,6 +8,7 @@ namespace Operose.ServicesLib
 {
     public class DatabaseService
     {
+        #region Get Blocking Sessions Query
         public DataTable GetBlockingSessions(
             string connectionString,
             string Filter = "",
@@ -69,14 +71,14 @@ namespace Operose.ServicesLib
                     command.Parameters.Add(new SqlParameter("@schema", Schema));
                     command.Parameters.Add(new SqlParameter("@help", Help));
 
-                    try
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                    catch (Exception e)
-                    {
-                        DebugHelper.WriteException(e);
-                    }
+                    //try
+                    //{
+                    //    command.ExecuteNonQuery();
+                    //}
+                    //catch (Exception e)
+                    //{
+                    //    DebugHelper.WriteException(e);
+                    //}
 
                     using (SqlDataAdapter da = new SqlDataAdapter(command))
                     {
@@ -89,7 +91,9 @@ namespace Operose.ServicesLib
                 }
             }
         }
+        #endregion
 
+        #region Clear Inactive Users Query
         public bool ClearInactiveUsers(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -115,5 +119,193 @@ namespace Operose.ServicesLib
             }
 
         }
+        #endregion
+
+        #region Stuck Batches Queries
+        public DataTable ActivityQuery(string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("SELECT * FROM ACTIVITY", connection))
+                {
+                    connection.Open();
+                    connection.ChangeDatabase("DYNAMICS");
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        var count = da.Fill(dataTable);
+                        DebugHelper.WriteLine("Database Context: " + connection.DataSource);
+                        DebugHelper.WriteLine("Number of rows returned: " + count);
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public DataTable Sy00800Query(string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("SELECT * FROM SY00800", connection))
+                {
+                    connection.Open();
+                    connection.ChangeDatabase("DYNAMICS");
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        var count = da.Fill(dataTable);
+                        DebugHelper.WriteLine("Database Context: " + connection.DataSource);
+                        DebugHelper.WriteLine("Number of rows returned: " + count);
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public DataTable Sy00801Query(string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("SELECT * FROM SY00801", connection))
+                {
+                    connection.Open();
+                    connection.ChangeDatabase("DYNAMICS");
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        var count = da.Fill(dataTable);
+                        DebugHelper.WriteLine("Database Context: " + connection.DataSource);
+                        DebugHelper.WriteLine("Number of rows returned: " + count);
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public DataTable DexLockQuery(string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("SELECT * FROM DEX_LOCK", connection))
+                {
+                    connection.Open();
+                    connection.ChangeDatabase("TEMPDB");
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        var count = da.Fill(dataTable);
+                        DebugHelper.WriteLine("Database Context: " + connection.DataSource);
+                        DebugHelper.WriteLine("Number of rows returned: " + count);
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public DataTable DexSessionQuery(string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("SELECT * FROM DEX_SESSION", connection))
+                {
+                    connection.Open();
+                    connection.ChangeDatabase("TEMPDB");
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        var count = da.Fill(dataTable);
+                        DebugHelper.WriteLine("Database Context: " + connection.DataSource);
+                        DebugHelper.WriteLine("Number of rows returned: " + count);
+                        return dataTable;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Batches
+        public DataTable GetBatches(string connectionString, string param)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string commandString;
+                if (param == null)
+                {
+                    commandString = @"SELECT
+                        BCHSOURC[Batch Source],
+                        BACHNUMB[Batch Number],
+                        SERIES[Series],
+                        MKDTOPST[Marked to Post],
+                        BCHSTTUS[Batch Status]
+                        FROM SY00500";
+                }
+                else
+                {
+                    commandString = @"SELECT
+                        BCHSOURC[Batch Source],
+                        BACHNUMB[Batch Number],
+                        SERIES[Series],
+                        MKDTOPST[Marked to Post],
+                        BCHSTTUS[Batch Status]
+                        FROM SY00500
+                        WHERE BACHNUMB LIKE @Batch";
+                }
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    if (param != null)
+                    {
+                        command.Parameters.Add("@Batch", SqlDbType.VarChar, 30).Value = param;
+                    }
+
+                    connection.Open();
+                    connection.ChangeDatabase("GPSTJ");
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        var count = da.Fill(dataTable);
+                        DebugHelper.WriteLine("Database Context: " + connection.DataSource);
+                        DebugHelper.WriteLine("Number of rows returned: " + count);
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+
+        public void ResetBatchStatus(string connectionString, string[] batchArray, ref IDictionary<string, bool> batchReport)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("UPDATE SY00500 SET MKDTOPST=0, BCHSTTUS=0 where BACHNUMB = @Batch", connection))
+                {
+                    command.Parameters.Add("@Batch", SqlDbType.VarChar, 30);
+
+                    connection.Open();
+                    connection.ChangeDatabase("GPSTJ");
+
+                    foreach (var batch in batchArray)
+                    {
+                        try
+                        {
+                            command.Parameters["@Batch"].Value = batch;
+                            var count = command.ExecuteNonQuery();
+                            bool success = count > 0 ? true : false;
+                            batchReport.Add(batch, success);
+                            DebugHelper.WriteLine("Database Context: " + connection.DataSource);
+                            DebugHelper.WriteLine("Number of rows returned: " + count);
+                        }
+                        catch(Exception ex)
+                        {
+                            DebugHelper.WriteException("Exception in ResetBatchStatus", ex.ToString());
+                            DebugHelper.WriteException(ex);
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
     }
 }

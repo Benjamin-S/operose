@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Operose.Properties {
+namespace Operose.HelpersLib.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Operose.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Operose.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Operose.HelpersLib.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,58 +61,20 @@ namespace Operose.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Batch Status.
+        ///   Looks up a localized string similar to Error.
         /// </summary>
-        internal static string BatchStatus {
+        internal static string Error {
             get {
-                return ResourceManager.GetString("BatchStatus", resourceCulture);
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Blocking Sessions.
+        ///   Looks up a localized string similar to Could not create the directory. Please check the path settings..
         /// </summary>
-        internal static string BlockingSessions {
+        internal static string Helpers_CreateDirectoryIfNotExist_Create_Failed {
             get {
-                return ResourceManager.GetString("BlockingSessions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap BSImage {
-            get {
-                object obj = ResourceManager.GetObject("BSImage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to save settings.
-        /// </summary>
-        internal static string FailedToSaveSettings {
-            get {
-                return ResourceManager.GetString("FailedToSaveSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Home.
-        /// </summary>
-        internal static string Home {
-            get {
-                return ResourceManager.GetString("Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your anti-virus software or the controlled folder access feature in Windows 10 could be blocking Operose..
-        /// </summary>
-        internal static string YourAntiVirusSoftwareOrTheControlledFolderAccessFeatureInWindows10CouldBeBlockingOperose {
-            get {
-                return ResourceManager.GetString("YourAntiVirusSoftwareOrTheControlledFolderAccessFeatureInWindows10CouldBeBlocking" +
-                        "Operose", resourceCulture);
+                return ResourceManager.GetString("Helpers_CreateDirectoryIfNotExist_Create_Failed", resourceCulture);
             }
         }
     }

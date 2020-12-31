@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
+﻿using Operose.HelpersLib.Properties;
+using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Operose.HelpersLib
 {
@@ -19,6 +18,8 @@ namespace Operose.HelpersLib
                 catch (Exception e)
                 {
                     DebugHelper.WriteException(e);
+                    MessageBox.Show(Resources.Helpers_CreateDirectoryIfNotExist_Create_Failed + "\r\n\r\n" + e, "ShareX - " + Resources.Error,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -1,9 +1,10 @@
 ﻿using Operose.HelpersLib;
 using Operose.ServicesLib;
 using System;
-using System.Windows.Forms;
-using System.Text;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
+using System.Windows.Forms;
 
 namespace Operose
 {
@@ -36,6 +37,12 @@ namespace Operose
 
         internal static DatabaseService databaseService = new DatabaseService();
 
+        internal static ApplicationConfig Settings { get; set; }
+
+        #region Paths
+        private static readonly string DefaultPersonalFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Name);
+        #endregion
+
         [STAThread]
         static void Main(string[] args)
         {
@@ -62,18 +69,37 @@ namespace Operose
             //DebugHelper.WriteLine("Build: " + Build);
             DebugHelper.WriteLine("Command line: " + Environment.CommandLine);
 
+
+            SettingManager.LoadInitialSettings();
+
+
             DebugHelper.WriteLine("MainForm init started.");
             MainForm = new MainForm();
             DebugHelper.WriteLine("Mainform init finished.");
 
             Application.Run(MainForm);
-            //Application.Run(new StuckBatchesForm());
+
+            CloseSequence();
         }
 
         static void InitialiseDefaults()
         {
             currentEnvironment = DatabaseEnv.Production;
             ConnectionString = Properties.Settings.Default.ProdCon;
+        }
+
+        public static void CloseSequence()
+        {
+            DebugHelper.WriteLine("Operose closing.");
+            SettingManager.SaveAllSettings();
+        }
+
+        public static string PersonalFolder
+        {
+            get
+            {
+                return DefaultPersonalFolder;
+            }
         }
     }
 }

@@ -52,5 +52,14 @@ namespace Operose.Properties {
                 return ((string)(this["TestCon"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt")]
+        public global::System.Drawing.Font DefaultFont {
+            get {
+                return ((global::System.Drawing.Font)(this["DefaultFont"]));
+            }
+        }
     }
 }

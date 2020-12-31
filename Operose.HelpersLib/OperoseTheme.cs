@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Operose.HelpersLib
 {
-    class OperoseTheme
+    public class OperoseTheme
     {
         public string Name { get; set; }
 

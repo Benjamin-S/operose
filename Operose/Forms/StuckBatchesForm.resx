@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblHelpText.Text" xml:space="preserve">
+    <value>This screen is to check what batches/resources are currently being occupied by which user. This is useful when batches/transactions are stuck because someone is in them and killing their session doesn't solve it.</value>
+  </data>
 </root>
