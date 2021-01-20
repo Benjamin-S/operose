@@ -36,8 +36,20 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controls\DarkColorTable.cs" />
+    <Compile Include="Controls\ToolStripCustomRenderer.cs" />
+    <Compile Include="Controls\ToolStripDarkRenderer.cs" />
+    <Compile Include="Controls\ToolStripRoundedEdgeRenderer.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\NumberExtensions.cs" />
+    <Compile Include="Helpers\ColorHelpers.cs" />
+    <Compile Include="Helpers\MathHelpers.cs" />
+    <Compile Include="Native\NativeEnums.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
+    <Compile Include="Native\NativeMethods_Helpers.cs" />
+    <Compile Include="OperoseResources.cs" />
+    <Compile Include="OperoseTheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\ToolStripBorderRight.cs">
       <SubType>Component</SubType>
@@ -45,7 +57,6 @@
     <Compile Include="DebugHelper.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="OperoseTheme.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,6 +81,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Colors\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Operose_Icon_White.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

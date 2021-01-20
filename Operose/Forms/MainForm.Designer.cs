@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pToolbars = new System.Windows.Forms.Panel();
-            this.tsMain = new Operose.HelpersLib.Controls.ToolStripBorderRight();
-            this.tsEnvironment = new Operose.HelpersLib.Controls.ToolStripBorderRight();
+            this.tsMain = new Operose.HelpersLib.ToolStripBorderRight();
+            this.tsEnvironment = new Operose.HelpersLib.ToolStripBorderRight();
             this.tsddbEnvironment = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiProduction = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDevelopment = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +60,7 @@
             this.tsMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.tsMain.Location = new System.Drawing.Point(0, 0);
             this.tsMain.Name = "tsMain";
-            this.tsMain.Size = new System.Drawing.Size(165, 374);
+            this.tsMain.Size = new System.Drawing.Size(165, 375);
             this.tsMain.TabIndex = 2;
             this.tsMain.Text = "toolStrip1";
             this.tsMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.HandleToolStripItemChange);
@@ -76,10 +75,10 @@
             this.tsddbEnvironment,
             this.tslbEnvironment});
             this.tsEnvironment.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsEnvironment.Location = new System.Drawing.Point(0, 374);
+            this.tsEnvironment.Location = new System.Drawing.Point(0, 375);
             this.tsEnvironment.MinimumSize = new System.Drawing.Size(165, 0);
             this.tsEnvironment.Name = "tsEnvironment";
-            this.tsEnvironment.Size = new System.Drawing.Size(165, 43);
+            this.tsEnvironment.Size = new System.Drawing.Size(165, 42);
             this.tsEnvironment.TabIndex = 3;
             this.tsEnvironment.Text = "toolStrip1";
             // 
@@ -89,11 +88,10 @@
             this.tsmiProduction,
             this.tsmiDevelopment,
             this.tsmiTest});
-            this.tsddbEnvironment.Image = ((System.Drawing.Image)(resources.GetObject("tsddbEnvironment.Image")));
             this.tsddbEnvironment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsddbEnvironment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsddbEnvironment.Name = "tsddbEnvironment";
-            this.tsddbEnvironment.Size = new System.Drawing.Size(163, 20);
+            this.tsddbEnvironment.Size = new System.Drawing.Size(163, 19);
             this.tsddbEnvironment.Text = "Environment";
             // 
             // tsmiProduction
@@ -153,9 +151,9 @@
         #endregion
 
         private System.Windows.Forms.Panel pToolbars;
-        private Operose.HelpersLib.Controls.ToolStripBorderRight tsMain;
+        private Operose.HelpersLib.ToolStripBorderRight tsMain;
         private System.Windows.Forms.Panel pMain;
-        private Operose.HelpersLib.Controls.ToolStripBorderRight tsEnvironment;
+        private Operose.HelpersLib.ToolStripBorderRight tsEnvironment;
         private System.Windows.Forms.ToolStripDropDownButton tsddbEnvironment;
         private System.Windows.Forms.ToolStripMenuItem tsmiProduction;
         private System.Windows.Forms.ToolStripMenuItem tsmiDevelopment;

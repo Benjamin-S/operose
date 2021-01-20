@@ -17,11 +17,14 @@ namespace Operose
 
         private void MainForm_HandleCreated(object sender, EventArgs e)
         {
+            NativeMethods.UseImmersiveDarkMode(Handle, OperoseResources.IsDarkTheme);
             DebugHelper.WriteLine("Startup time: {0} ms", Program.StartTimer.ElapsedMilliseconds);
+            DebugHelper.WriteLine("Is Handle bool = {0}", IsHandleCreated);
         }
 
         // Constants because resource files aren't necessary (we aren't translating this program).
         public const string ACTION_HOME = "Home";
+
         public const string ACTION_BLOCK = "Blocking Sessions";
         public const string ACTION_CLEAR_INACTIVE = "Clear Inactive Users";
         public const string ACTION_STUCK_BATCHES = "Stuck Batches";
@@ -32,7 +35,8 @@ namespace Operose
         public const string ACTION_ABOUT = "About...";
 
         public const string HORIZONTAL_RULE = "";
-        readonly List<string> functions = new List<string>()
+
+        private readonly List<string> functions = new List<string>()
         {
             ACTION_HOME,
             ACTION_BLOCK,
@@ -48,11 +52,11 @@ namespace Operose
 
         // Controls that will be used throughout
 
-        BlockingSessionsForm blockingSessionsControl = new BlockingSessionsForm();
-        StuckBatchesForm stuckBatchesControl = new StuckBatchesForm();
-        ResetBatchesForm resetBatchesForm = new ResetBatchesForm();
+        private BlockingSessionsForm blockingSessionsControl = new BlockingSessionsForm();
+        private StuckBatchesForm stuckBatchesControl = new StuckBatchesForm();
+        private ResetBatchesForm resetBatchesForm = new ResetBatchesForm();
 
-        private Control mainControl = new Panel();
+        private HomeForm HomeControl = new HomeForm();
 
         public Control CurrentControl { get; set; }
         public string CurrentControlString;
@@ -61,6 +65,9 @@ namespace Operose
         {
             // Components need to be loaded before any changes can be done via code.
             InitializeComponent();
+
+            UpdateTheme();
+            OperoseResources.ApplyTheme(this);
 
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
@@ -87,31 +94,31 @@ namespace Operose
                     });
                 }
             }
-            AddControlToForm(pMain, mainControl, ACTION_HOME);
-            UpdateEnvironmentLabel(Program.currentEnvironment);
+
+            AddControlToForm(pMain, HomeControl, ACTION_HOME);
+            UpdateEnvironmentLabel(EnvironmentManager.CurrentEnvironment);
 
             HandleCreated += MainForm_HandleCreated;
         }
 
         private void HandleEnvironmentChange(object sender, EventArgs e)
         {
-            switch (sender.ToString())
-            {
-                case "Production":
-                    Program.currentEnvironment = DatabaseEnv.Production;
-                    Program.ConnectionString = Properties.Settings.Default.ProdCon;
-                    break;
-                case "Development":
-                    Program.currentEnvironment = DatabaseEnv.Development;
-                    Program.ConnectionString = Properties.Settings.Default.DevCon;
-                    break;
-                case "Test":
-                    Program.currentEnvironment = DatabaseEnv.Test;
-                    Program.ConnectionString = Properties.Settings.Default.TestCon;
-                    break;
+            string selectedEnvironment = sender.ToString();
 
-            }
-            UpdateEnvironmentLabel(Program.currentEnvironment);
+            EnvironmentManager.CurrentEnvironment = EnvironmentManager.GetEnvFromString(selectedEnvironment);
+
+            #region Debugging Logs
+
+            DebugHelper.WriteLine($"Selected Environment: {selectedEnvironment}");
+            DebugHelper.WriteLine($"Environment Enum: {EnvironmentManager.GetEnvFromString(selectedEnvironment).ToString()}");
+            DebugHelper.WriteLine($"Connection String: { EnvironmentManager.GetConnection(EnvironmentManager.CurrentEnvironment)}");
+
+            #endregion Debugging Logs
+
+            EnvironmentManager.CurrentConnectionString = EnvironmentManager.GetConnection(EnvironmentManager.CurrentEnvironment);
+
+            UpdateEnvironmentLabel(EnvironmentManager.CurrentEnvironment);
+            Program.Settings.LastEnvironment = EnvironmentManager.CurrentEnvironment;
         }
 
         private void UpdateEnvironmentLabel(DatabaseEnv env)
@@ -138,7 +145,7 @@ namespace Operose
 
             await Task.Run(() =>
             {
-                didSucceed = Program.databaseService.ClearInactiveUsers(Program.ConnectionString);
+                didSucceed = Program.databaseService.ClearInactiveUsers(EnvironmentManager.CurrentConnectionString);
             });
             var message = didSucceed ? "was successful" : "was a failure";
             MessageBox.Show("Clear inactive users " + message);
@@ -156,24 +163,62 @@ namespace Operose
                 case ACTION_BLOCK:
                     AddControlToForm(pMain, blockingSessionsControl, ACTION_BLOCK);
                     break;
+
                 case ACTION_CLEAR_INACTIVE:
                     await Action_ClearInactiveUsers();
                     break;
+
                 case ACTION_STUCK_BATCHES:
                     AddControlToForm(pMain, stuckBatchesControl, ACTION_STUCK_BATCHES);
                     break;
+
                 case ACTION_BATCHES:
                     AddControlToForm(pMain, resetBatchesForm, ACTION_BATCHES);
                     break;
+
                 case ACTION_ABOUT:
                     using (AboutForm about = new AboutForm())
                     {
                         about.ShowDialog(this);
                     }
                     break;
+
                 default:
-                    AddControlToForm(pMain, mainControl, ACTION_HOME);
+                    AddControlToForm(pMain, HomeControl, ACTION_HOME);
                     break;
+            }
+        }
+
+        public void UpdateTheme()
+        {
+            if (Program.Settings.Themes == null || Program.Settings.Themes.Count == 0)
+            {
+                Program.Settings.Themes = OperoseTheme.GetDefaultThemes();
+                Program.Settings.SelectedTheme = 0;
+            }
+
+            if (!Program.Settings.Themes.IsValidIndex(Program.Settings.SelectedTheme))
+            {
+                Program.Settings.SelectedTheme = 0;
+            }
+
+            OperoseResources.Theme = Program.Settings.Themes[Program.Settings.SelectedTheme];
+            OperoseResources.UseCustomTheme = Program.Settings.UseCustomTheme;
+
+            if (IsHandleCreated)
+            {
+                NativeMethods.UseImmersiveDarkMode(Handle, OperoseResources.IsDarkTheme);
+            }
+
+            if (OperoseResources.UseCustomTheme)
+            {
+                tsMain.Renderer = new ToolStripDarkRenderer();
+                tsMain.DrawCustomBorder = false;
+                pToolbars.BackColor = OperoseResources.Theme.BackgroundColor;
+                tsEnvironment.Renderer = new ToolStripDarkRenderer();
+                tsEnvironment.DrawCustomBorder = false;
+                pMain.BackColor = OperoseResources.Theme.BackgroundColor;
+                pMain.ForeColor = OperoseResources.Theme.TextColor;
             }
         }
     }

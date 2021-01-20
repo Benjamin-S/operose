@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationConfig.cs" />
+    <Compile Include="EnvironmentManager.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +66,12 @@
     </Compile>
     <Compile Include="Forms\Controls\ResetBatchDGV.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\HomeForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\HomeForm.Designer.cs">
+      <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ResetBatchesForm.cs">
       <SubType>UserControl</SubType>
@@ -91,6 +101,9 @@
     <EmbeddedResource Include="Forms\BlockingSessionsForm.resx">
       <DependentUpon>BlockingSessionsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HomeForm.resx">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResetBatchesForm.resx">
       <DependentUpon>ResetBatchesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +123,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.manifest" />
+    <None Include="Properties\DataSources\BatchModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -136,6 +151,10 @@
   <ItemGroup>
     <None Include="Resources\BSImage.bmp" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\HomePage.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

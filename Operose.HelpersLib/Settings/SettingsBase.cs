@@ -11,13 +11,14 @@ using System.Windows.Forms;
 
 namespace Operose.HelpersLib
 {
-    public abstract class SettingsBase<T> where T: SettingsBase<T>, new ()
+    public abstract class SettingsBase<T> where T : SettingsBase<T>, new()
     {
-
         public delegate void SettingsSavedEventHandler(T settings, string filePath, bool result);
+
         public event SettingsSavedEventHandler SettingsSaved;
 
         public delegate void SettingsSaveFailedEventHandler(Exception e);
+
         public event SettingsSaveFailedEventHandler SettingsSaveFailed;
 
         [Browsable(false), JsonIgnore]
@@ -140,7 +141,7 @@ namespace Operose.HelpersLib
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.ContractResolver = new WritablePropertiesOnlyResolver();
-           
+
                 serializer.Converters.Add(new StringEnumConverter());
                 serializer.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                 serializer.Formatting = Formatting.Indented;

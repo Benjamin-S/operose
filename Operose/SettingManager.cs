@@ -17,7 +17,6 @@ namespace Operose
             }
         }
 
-
         private static ApplicationConfig Settings { get => Program.Settings; set => Program.Settings = value; }
         private const int SettingsSaveFailWarningLimit = 3;
         private static int settingsSaveFailWarningCount;
@@ -48,7 +47,6 @@ namespace Operose
         public static void SaveAllSettings()
         {
             if (Settings != null) Settings.Save(ApplicationConfigFilePath);
-
         }
 
         public static void SaveApplicationConfigAsync()
@@ -87,6 +85,5 @@ namespace Operose
 
             settingsSaveFailWarningCount++;
         }
-
     }
 }

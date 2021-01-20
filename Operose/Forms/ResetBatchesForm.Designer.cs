@@ -171,7 +171,6 @@
             // 
             this.tlpConfirmBatches.SetColumnSpan(this.lvConfirmBatches, 2);
             this.lvConfirmBatches.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvConfirmBatches.GridLines = true;
             this.lvConfirmBatches.HideSelection = false;
             this.lvConfirmBatches.Location = new System.Drawing.Point(3, 36);
             this.lvConfirmBatches.Name = "lvConfirmBatches";
@@ -179,6 +178,7 @@
             this.lvConfirmBatches.TabIndex = 2;
             this.lvConfirmBatches.UseCompatibleStateImageBehavior = false;
             this.lvConfirmBatches.View = System.Windows.Forms.View.Details;
+            this.lvConfirmBatches.SizeChanged += new System.EventHandler(this.lvConfirmBatches_SizeChanged);
             // 
             // panel1
             // 

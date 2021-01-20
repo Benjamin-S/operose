@@ -9,6 +9,7 @@ namespace Operose.ServicesLib
     public class DatabaseService
     {
         #region Get Blocking Sessions Query
+
         public DataTable GetBlockingSessions(
             string connectionString,
             string Filter = "",
@@ -91,9 +92,11 @@ namespace Operose.ServicesLib
                 }
             }
         }
-        #endregion
+
+        #endregion Get Blocking Sessions Query
 
         #region Clear Inactive Users Query
+
         public bool ClearInactiveUsers(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -117,11 +120,12 @@ namespace Operose.ServicesLib
                     }
                 }
             }
-
         }
-        #endregion
+
+        #endregion Clear Inactive Users Query
 
         #region Stuck Batches Queries
+
         public DataTable ActivityQuery(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -222,9 +226,11 @@ namespace Operose.ServicesLib
                 }
             }
         }
-        #endregion
+
+        #endregion Stuck Batches Queries
 
         #region Batches
+
         public DataTable GetBatches(string connectionString, string param)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -273,7 +279,6 @@ namespace Operose.ServicesLib
             }
         }
 
-
         public void ResetBatchStatus(string connectionString, string[] batchArray, ref IDictionary<string, bool> batchReport)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -296,7 +301,7 @@ namespace Operose.ServicesLib
                             DebugHelper.WriteLine("Database Context: " + connection.DataSource);
                             DebugHelper.WriteLine("Number of rows returned: " + count);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             DebugHelper.WriteException("Exception in ResetBatchStatus", ex.ToString());
                             DebugHelper.WriteException(ex);
@@ -306,6 +311,6 @@ namespace Operose.ServicesLib
             }
         }
 
-        #endregion
+        #endregion Batches
     }
 }

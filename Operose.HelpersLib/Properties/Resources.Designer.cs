@@ -77,5 +77,15 @@ namespace Operose.HelpersLib.Properties {
                 return ResourceManager.GetString("Helpers_CreateDirectoryIfNotExist_Create_Failed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Operose_Icon_White {
+            get {
+                object obj = ResourceManager.GetObject("Operose_Icon_White", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

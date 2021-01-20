@@ -27,24 +27,25 @@ namespace Operose
 
         public static string Title => $"{Name} {VersionText}";
 
-        public static string ConnectionString;
-        public static DatabaseEnv currentEnvironment;
+        #region Forms
 
         internal static MainForm MainForm { get; private set; }
         internal static StuckBatchesForm StuckBatchesForm { get; set; }
 
+        #endregion Forms
+
         internal static Stopwatch StartTimer { get; private set; }
-
         internal static DatabaseService databaseService = new DatabaseService();
-
         internal static ApplicationConfig Settings { get; set; }
 
         #region Paths
+
         private static readonly string DefaultPersonalFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Name);
-        #endregion
+
+        #endregion Paths
 
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Allow Visual Studio to break on exceptions in Debug builds
 #if !DEBUG
@@ -60,7 +61,6 @@ namespace Operose
 
             StartTimer = Stopwatch.StartNew();
 
-            InitialiseDefaults();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -69,9 +69,8 @@ namespace Operose
             //DebugHelper.WriteLine("Build: " + Build);
             DebugHelper.WriteLine("Command line: " + Environment.CommandLine);
 
-
             SettingManager.LoadInitialSettings();
-
+            InitialiseDefaults();
 
             DebugHelper.WriteLine("MainForm init started.");
             MainForm = new MainForm();
@@ -82,15 +81,15 @@ namespace Operose
             CloseSequence();
         }
 
-        static void InitialiseDefaults()
+        private static void InitialiseDefaults()
         {
-            currentEnvironment = DatabaseEnv.Production;
-            ConnectionString = Properties.Settings.Default.ProdCon;
+            EnvironmentManager.CurrentEnvironment = Settings.LastEnvironment;
+            EnvironmentManager.CurrentConnectionString = EnvironmentManager.GetConnection(EnvironmentManager.CurrentEnvironment);
         }
 
         public static void CloseSequence()
         {
-            DebugHelper.WriteLine("Operose closing.");
+            DebugHelper.WriteLine($"{Name} closing.");
             SettingManager.SaveAllSettings();
         }
 
@@ -99,6 +98,14 @@ namespace Operose
             get
             {
                 return DefaultPersonalFolder;
+            }
+        }
+
+        public static Uri HelpFile
+        {
+            get
+            {
+                return new Uri(string.Format("file:///{0}/Resources/HomePage.html", Directory.GetCurrentDirectory()));
             }
         }
     }

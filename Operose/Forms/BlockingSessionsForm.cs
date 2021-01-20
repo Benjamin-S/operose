@@ -1,8 +1,5 @@
 ﻿using Operose.HelpersLib;
 using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Operose
@@ -15,6 +12,7 @@ namespace Operose
         public BlockingSessionsForm()
         {
             InitializeComponent();
+            OperoseResources.ApplyCustomThemeToControl(this);
             Dock = DockStyle.Fill;
             base.DoubleBuffered = true;
             dgvBlockingList.AllowUserToResizeColumns = true;
@@ -31,7 +29,6 @@ namespace Operose
         //m_oWorker.WorkerReportsProgress = true;
         //m_oWorker.WorkerSupportsCancellation = true;
 
-
         /// <summary>
         /// On completed do the appropriate task
         /// </summary>
@@ -41,7 +38,7 @@ namespace Operose
         //{
         //    // The background process is complete. We need to inspect
         //    // our response to see if an error occurred, a cancel was
-        //    // requested or if we completed successfully.  
+        //    // requested or if we completed successfully.
         //    if (e.Cancelled)
         //    {
         //        lblStatus.Text = "Task Cancelled.";
@@ -71,14 +68,13 @@ namespace Operose
         ///// <param name="e"></param>
         //void m_oWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         //{
-
         //    // This function fires on the UI thread so it's safe to edit
 
         //    // the UI control directly, no funny business with Control.Invoke :)
 
         //    // Update the progressBar with the integer supplied to us from the
 
-        //    // ReportProgress() function.  
+        //    // ReportProgress() function.
 
         //    progressBar1.Value = e.ProgressPercentage;
         //    lblStatus.Text = "Processing......" + progressBar1.Value.ToString() + "%";
@@ -101,7 +97,7 @@ namespace Operose
 
         //        // Periodically report progress to the main thread so that it can
         //        // update the UI.  In most cases you'll just need to send an
-        //        // integer that will update a ProgressBar                    
+        //        // integer that will update a ProgressBar
         //        m_oWorker.ReportProgress(i);
         //        // Periodically check if a cancellation request is pending.
         //        // If the user clicks cancel the line
@@ -127,7 +123,7 @@ namespace Operose
         //{
         //    //Change the status of the buttons on the UI accordingly
         //    //The start button is disabled as soon as the background operation is started
-        //    //The Cancel button is enabled so that the user can stop the operation 
+        //    //The Cancel button is enabled so that the user can stop the operation
         //    //at any point of time during the execution
         //    btnStartAsyncOperation.Enabled = false;
         //    btnCancel.Enabled = true;
@@ -140,18 +136,17 @@ namespace Operose
         //{
         //    if (m_oWorker.IsBusy)
         //    {
-
         //        // Notify the worker thread that a cancel has been requested.
 
         //        // The cancel will not actually happen until the thread in the
 
-        //        // DoWork checks the m_oWorker.CancellationPending flag. 
+        //        // DoWork checks the m_oWorker.CancellationPending flag.
 
         //        m_oWorker.CancelAsync();
         //    }
         //}
 
-        #endregion
+        #endregion Background worker example
 
         private void GetBlockingSessions()
         {
@@ -163,7 +158,7 @@ namespace Operose
                 SuspendLayout();
                 dgvBlockingList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
                 dgvBlockingList.AllowUserToResizeColumns = true;
-                dgvBlockingList.DataSource = Program.databaseService.GetBlockingSessions(Program.ConnectionString, Show_own_spid: _showOwnPID, Output_column_list: summaryColumns);
+                dgvBlockingList.DataSource = Program.databaseService.GetBlockingSessions(EnvironmentManager.CurrentConnectionString, Show_own_spid: _showOwnPID, Output_column_list: summaryColumns);
                 ResumeLayout();
             }
             else
@@ -171,7 +166,7 @@ namespace Operose
                 SuspendLayout();
                 dgvBlockingList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
                 dgvBlockingList.AllowUserToResizeColumns = false;
-                dgvBlockingList.DataSource = Program.databaseService.GetBlockingSessions(Program.ConnectionString, Show_own_spid: _showOwnPID);
+                dgvBlockingList.DataSource = Program.databaseService.GetBlockingSessions(EnvironmentManager.CurrentConnectionString, Show_own_spid: _showOwnPID);
                 ResumeLayout();
             }
         }
@@ -188,7 +183,6 @@ namespace Operose
             else
             {
                 DebugHelper.WriteLine("Parent Removed");
-
             }
         }
 

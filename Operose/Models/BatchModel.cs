@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Operose
+﻿namespace Operose
 {
     public class BatchModel
     {
@@ -14,7 +8,9 @@ namespace Operose
         public int BatchStatus { get; set; }
         public bool Selected { get; set; }
 
-        public BatchModel() { }
+        public BatchModel()
+        {
+        }
 
         public BatchModel(string batchSource, string batchNumber, int markedToPost, int batchStatus, bool selected = false)
         {

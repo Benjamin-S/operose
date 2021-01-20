@@ -218,13 +218,13 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // StuckBatchesControl
+            // StuckBatchesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlStuckBatches);
             this.Controls.Add(this.pnlButtons);
-            this.Name = "StuckBatchesControl";
+            this.Name = "StuckBatchesForm";
             this.Size = new System.Drawing.Size(560, 744);
             this.pnlStuckBatches.ResumeLayout(false);
             this.gbDEX_SESSION.ResumeLayout(false);

@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Operose.HelpersLib.Controls
+namespace Operose.HelpersLib
 {
-    public class ToolStripBorderRight: ToolStrip
+    public class ToolStripBorderRight : ToolStrip
     {
         public bool DrawCustomBorder { get; set; } = true;
 
